@@ -1,0 +1,8 @@
+body{
+    background-color: rgb(92, 88, 88);
+}
+
+.main{
+    display: flexbox;
+    background-color: white;
+}
