@@ -2,43 +2,55 @@
 include_once 'includes/bootstrap.inc.php';
 include_once 'includes/db.inc.php';
 
+// starter session
 session_start();
 
 
 if(isset($_POST["submit"])){
+    // sjekker at formet er fylt ut og henter verdiene
     $user = $_POST["uname"];
     $pwd = $_POST["pass1"];
-
+    //Sjekker om brukernavnet er tomt og om brukernavet inneholde tilatte symboler
     if(empty($user)) {
         $user_err = "Brukernavnet kan ikke være tomt";
-    }elseif(!preg_match('/^[a-zA-Z0-9 øæå]+$/', $user)){
+    }elseif(!preg_match('/^[a-zA-Z0-9 øæåØÆÅ]+$/', $user)){
         $user_err = "Brukernavnet kan kun inneholder bokstaver og tall";
     }else{
-
+        //Forbreder spørringen
         $quey = $conn->prepare("select id, bruker_navn, bruker_passord from brukere where bruker_navn = ?");
-
+        //Kobler parameterene i spøringen med verdiene hentet ut fra from-et.
         $quey->bind_param("s", $user);
+        //utfører spørringen
         $quey->execute();
+        //Henter resultatet
         $quey->store_result();
         
-
+        //Sjekker om man får tilbake en rad med brukernavnet
         if($quey->num_rows == 1){
+            //binder vareabler til select setningen
             $quey->bind_result($id, $username, $hashed_password);
+            //henter ut resultatet
             $quey->fetch();
+            //Sjekker hashed_password med passordet brukeren ga.
             if(password_verify($pwd, $hashed_password)){
+                //setter session vareabler
                 $_SESSION["pålogget"] = true;
                 $_SESSION["brukerid"] = $id;
                 $_SESSION["brukernavn"] = $username;
-
+                //fører brukeren videre til hjemmesiden.
                 header("Location: welcome.php");
             }else{
+                // error melding
                 $pass_err = "Brukernavnet eller passordet stemmer ikke. Prøv på nytt";
             }
         }else{
+            // error melding
             $user_err = "Ingen bruker med navnet: $user";
         }
-        
+        //lukker spørringen
         $quey->close();
+        //luker tilkoblingen til db
+        $conn->close();
     }
 }
 

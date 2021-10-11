@@ -1,9 +1,12 @@
 <?php
 include_once 'includes/bootstrap.inc.php';
 include_once 'includes/db.inc.php';
+//starter session
 session_start();
+
+// sjekker at session vareabelen pålogget = true.
 if($_SESSION["pålogget"] !== true){
-    header('Location: login.php?error=nouser');
+    header('Location: login.php?error=notLoggedIn');
 }
 
 ?>
@@ -17,9 +20,10 @@ if($_SESSION["pålogget"] !== true){
 </head>
 
 <body>
-    <h1>Dette vil bli hjemmesiden for de som hart logget på</h1>
+    <h1>Dette vil bli hjemmesiden for de som har logget på</h1>
 
 <?php 
+//skriver ut bruker id og brukernavn. 
     echo "Bruker id: ".  $_SESSION["brukerid"];
     echo "<br>";
     echo "Brukernavn : " .  $_SESSION["brukernavn"];

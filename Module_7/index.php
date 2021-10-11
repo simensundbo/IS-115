@@ -5,6 +5,7 @@
     <title>IS-115</title>
 </head>
 <body>
+    <!-- Linker til login og signup siden -->
     <h1>Modul 7</h1>
     <a href="login.php">Logg på her</a>
     <a href="signup.php">Registrer deg her</a>

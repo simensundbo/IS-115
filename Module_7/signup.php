@@ -4,44 +4,53 @@ include_once 'includes/db.inc.php';
 
 
 if(isset($_POST["submit"])) {
+    // sjekker at formet er fylt ut og henter verdiene
     $user = $_POST["uname"];
     $pwd = $_POST["pass1"];
     $pwdRepeat = $_POST["pass2"];
-
+    //Sjekker om brukernavnet er tomt og om brukernavet inneholde tilatte symboler
     if(empty($user)) {
         $user_err = "Brukernavnet kan ikke være tomt";
     }elseif(!preg_match('/^[a-zA-Z0-9 øæå]+$/', $user)){
         $user_err = "Brukernavnet kan kun inneholder bokstaver og tall";
+
     }else{
-
+        //Forbreder spørringen for å sjekke om brukernavnet allerede er i bruk
         $quey = $conn->prepare("select * from brukere where bruker_navn = ?");
-
+        //Kobler parameterene i spøringen med verdiene hentet ut fra from-et.
         $quey->bind_param("s", $user);
+        // utfører spørringen
         $quey->execute();
+        // henter resultatet
         $quey->store_result();
-
+        // sjekker antale rader
         if($quey->num_rows == 1){
             $user_err = "Brukernavnet er alt tatt";
         }
-
+        // lukker spørringen
         $quey->close();
     }
 
-    if($pwd == $pwdRepeat){
-        $quey = $conn->prepare("insert into brukere(bruker_navn, bruker_passord) values(?,?)");
-        $hashPwd = password_hash($pwd, PASSWORD_DEFAULT);
-        $quey->bind_param("ss", $user, $hashPwd);
-        $quey->execute();
-        $id = $quey->insert_id;
-
-        $quey->close();
-        header("Location: login.php");
-    }else{
+    if($pwd !== $pwdRepeat){
         $pass_err = "Passordene må være like";
     }
+
+    if(empty($user_err) and empty($pass_err)){
+        //forbreder spørringen
+        $quey = $conn->prepare("insert into brukere(bruker_navn, bruker_passord) values(?,?)");
+        // hasher passordet
+        $hashPwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $quey->bind_param("ss", $user, $hashPwd);
+        // utfører spørringen
+        $quey->execute();
+
+        //lukker spørringen
+        $quey->close();
+        //luker tilkoblingen til db
+        $conn->close();
+        header("Location: login.php");
+    }
 }
-
-
 
 ?>
 
@@ -53,7 +62,7 @@ if(isset($_POST["submit"])) {
 
 <body>
     <main class="w-50">
-        <form action="signup.php" method="post">
+        <form action="" method="post">
             <h1 class="display-3 mb-3">Registrer deg her</h1>
 
             <div class="mb-2 form-floating">
