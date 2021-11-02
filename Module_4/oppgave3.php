@@ -16,8 +16,7 @@ $currentData = array(
 );
 
 //sjekker at formet blit utfylt
-if(isset($_POST["submit"]))
-{
+if (isset($_POST["submit"])) {
     //henter ut verdiene fra form-en.
     $epost = $_POST["epost"];
     $fornavn = $_POST["fornavn"];
@@ -33,43 +32,25 @@ if(isset($_POST["submit"]))
 
 
     //Sjekker om alle feltene er fylt inn.
-    if(!$epost)
-    {
+    if (!$epost) {
         echo "Epost ble ikke fylt ut";
-    }
-    elseif(!$fornavn)
-    {
+    } elseif (!$fornavn) {
         echo "Fornavn ble ikke fylt ut";
-    }
-    elseif(!$etternavn)
-    {
+    } elseif (!$etternavn) {
         echo "Etternavn ble ikke fylt ut";
-    }
-    elseif(!$adresse)
-    {
+    } elseif (!$adresse) {
         echo "Adresse ble ikke fylt ut";
-    }
-    elseif(!$postnr)
-    {
+    } elseif (!$postnr) {
         echo "Post nummer ble ikke fylt ut";
-    }
-    elseif(!$poststed)
-    {
+    } elseif (!$poststed) {
         echo "Post sted ble ikke fylt ut";
-    }
-    elseif(!$fødselsdato)
-    {
+    } elseif (!$fødselsdato) {
         echo "Fødselsdato ble ikke fylt ut";
-    }
-    elseif(!$bruker)
-    {
+    } elseif (!$bruker) {
         echo "Brukernavn ble ikke fult ut";
-    }
-    elseif(!$passord)
-    {
+    } elseif (!$passord) {
         echo "Passord ble ikke fylt ut";
-    }else
-    {
+    } else {
         //lager en Associative array
         $newData = array(
             "Epost" => $epost,
@@ -85,17 +66,14 @@ if(isset($_POST["submit"]))
             "Passord" => $passord
         );
 
-        if($currentData == $newData)//Sjekker om brukeren har endret noen av feltene.
+        if ($currentData == $newData) //Sjekker om brukeren har endret noen av feltene.
         {
             echo "Ingen endring ble gjort";
-        }
-        else
-        {
+        } else {
             $currentData = array_replace($currentData, $newData);
 
-            echo "Medlemsoppdatering: <br><br>";//lopper gjennom arrayen for å printe den ut.
-            foreach($currentData as $key => $value)
-            {
+            echo "Medlemsoppdatering: <br><br>"; //lopper gjennom arrayen for å printe den ut.
+            foreach ($currentData as $key => $value) {
                 echo "$key: $value<br>";
             }
         }
@@ -109,56 +87,56 @@ if(isset($_POST["submit"]))
         <h3>Oppdater medlems infomasjon</h3>
         <tr>
             <th>Epost*:</th>
-            <td><input type="email" name="epost" value="<?php print_r($currentData["Epost"])?> "></td>
+            <td><input type="email" name="epost" value="<?php print_r($currentData["Epost"]) ?> "></td>
         </tr>
         <tr>
             <th>Fornavn*:</th>
-            <td><input type="text" name="fornavn" value="<?php print_r($currentData["Fornavn"])?>"></td>
+            <td><input type="text" name="fornavn" value="<?php print_r($currentData["Fornavn"]) ?>"></td>
         </tr>
         <tr>
             <th>Etternavn*:</th>
-            <td><input type="text" name="etternavn" value="<?php print_r($currentData["Etternavn"])?>"></td>
+            <td><input type="text" name="etternavn" value="<?php print_r($currentData["Etternavn"]) ?>"></td>
         </tr>
         <tr>
             <th>Adresse*:</th>
-            <td><input type="text" name="adresse" value="<?php print_r($currentData["Adresse"])?>"></td>
+            <td><input type="text" name="adresse" value="<?php print_r($currentData["Adresse"]) ?>"></td>
         </tr>
         <tr>
             <th>Postnr*:</th>
-            <td><input type="number" name="postnr" value="<?php print_r($currentData["Post nummer"])?>"></td>
+            <td><input type="number" name="postnr" value="<?php print_r($currentData["Post nummer"]) ?>"></td>
         </tr>
         <tr>
             <th>Poststed:</th>
-            <td><input type="text" name="poststed" value="<?php print_r($currentData["Post sted"])?>"></td>
+            <td><input type="text" name="poststed" value="<?php print_r($currentData["Post sted"]) ?>"></td>
         </tr>
         <tr>
             <th>Mobilnr*:</th>
-            <td><input type="number" name="mobilnr" value="<?php print_r($currentData["Mobil nummer"])?>"></td>
+            <td><input type="number" name="mobilnr" value="<?php print_r($currentData["Mobil nummer"]) ?>"></td>
         </tr>
         <tr>
             <th>Fødselsdato*:</th>
-            <td><input type="date" name="fødselsdato" value="<?php print_r($currentData["Fødselsdato"])?>"></td>
+            <td><input type="date" name="fødselsdato" value="<?php print_r($currentData["Fødselsdato"]) ?>"></td>
         </tr>
         <tr>
             <th>Kjønn</th>
             <td><select name="kjønn">
-                </optgroup>
+                    </optgroup>
                     <optgroup label="Nå værende">
-                    <option value="<?php print_r($currentData["Kjønn"])?>"><?php print_r($currentData["Kjønn"])?></option>
-                </optgroup>
+                        <option value="<?php print_r($currentData["Kjønn"]) ?>"><?php print_r($currentData["Kjønn"]) ?></option>
+                    </optgroup>
                     <optgroup label="Kjønn">
-                    <option value="Mann">Mann</option>
-                    <option value="Dame">Dame</option>
-                <option value="Øsnker ikke å oppgi">Øsnker ikke å oppgi</option>
-            </select></td>
+                        <option value="Mann">Mann</option>
+                        <option value="Dame">Dame</option>
+                        <option value="Øsnker ikke å oppgi">Øsnker ikke å oppgi</option>
+                </select></td>
         </tr>
         <tr>
             <th>Brukernavn*:</th>
-            <td><input type="text" name="brukernavn" value="<?php print_r($currentData["Bruker Navn"])?>"></td>
+            <td><input type="text" name="brukernavn" value="<?php print_r($currentData["Bruker Navn"]) ?>"></td>
         </tr>
         <tr>
             <th>Passord*:</th>
-            <td><input type="password" name="passord" value="<?php print_r($currentData["Passord"])?>"></td>
+            <td><input type="password" name="passord" value="<?php print_r($currentData["Passord"]) ?>"></td>
         </tr>
     </table>
     <input type="submit" name="submit" value="Oppdater bruker">
