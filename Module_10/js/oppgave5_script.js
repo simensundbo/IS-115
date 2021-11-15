@@ -38,5 +38,5 @@ function getTemp() {
     xhr.send();
 
     //funksjonen kller på seg selv. En recursive loop
-    setInterval(getTemp, 300000);
+    setInterval(getTemp, 600000);
 }
