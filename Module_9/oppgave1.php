@@ -2,14 +2,14 @@
 
 if(isset($_POST["submit"])){
 
-    
+        //henter ut data fra formet
         $firstname = $_POST["fname"];
         $lastname = $_POST["lname"];
         $mailFrom = $_POST["email"];
         $msg = $_POST["msg"];
     
 
-
+    //sjekker at de ikke er tomme
     if(!empty($firstname)| !empty($lastname) | !empty($mailFrom) | !empty($msg)){
         $mailTo = "Sim123@live.no";
         $subject = "Neo Ungdomsklubb";
@@ -17,7 +17,10 @@ if(isset($_POST["submit"])){
 
         $txt = "Mail fra $firstname $lastname. \n\n" . $msg;
 
+        //sender
         mail($mailTo, $subject, $txt, $headers);
+        
+        //
         header("Location: oppgave1.php?mail=succsess");
 
     }else{

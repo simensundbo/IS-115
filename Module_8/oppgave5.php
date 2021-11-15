@@ -8,7 +8,7 @@ $city = "Kristiansand";
 use setasign\Fpdi\Fpdi;
 
 //importerer både FPDF og autoloaderen til FPDI
-require "FPDF/fpdf.php";
+require_once "FPDF/fpdf.php";
 require_once "FPDI/autoload.php";
 
 //Lager ett nytt objekt av Fpdi

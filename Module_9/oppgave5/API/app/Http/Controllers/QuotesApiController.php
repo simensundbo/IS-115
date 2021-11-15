@@ -10,7 +10,6 @@ class QuotesApiController extends Controller
 {
     public function all()
     {
-
         return Quotes::all();
     }
 
@@ -37,6 +36,5 @@ class QuotesApiController extends Controller
         $id = rand(0, $num);
 
         return Quotes::find($id);
-
     }
 }

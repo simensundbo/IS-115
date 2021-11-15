@@ -96,7 +96,6 @@ if (isset($_POST["submit"])) {
 
 </html>
 ';
-
     mail($mailTo, $subject, $txt, implode("\r\n", $headers));
     header("Location: oppgave2.php?mail=succsess");
 }

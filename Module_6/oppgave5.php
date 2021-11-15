@@ -43,8 +43,7 @@ if(isset($_POST["submit"])){
         <option value="Lesing">Lesing</option>
         <option value="Fiske">Fiske</option>
         </select>
-
- 
+        
         <input type="submit" name="submit">
     </form>
 

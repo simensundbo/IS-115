@@ -14,7 +14,7 @@
     <a href="oppgave2.php">Oppgave 2-></a>
 
     <h3>Oppgave 3</h3>
-    <a href="oppgave3">Oppgave 3-></a>
+    <a href="oppgave3.php">Oppgave 3-></a>
 
     <h3>Oppgave 4</h3>
     <a href="oppgave4.php">Oppgave 4-></a>

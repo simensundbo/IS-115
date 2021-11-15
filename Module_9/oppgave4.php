@@ -1,9 +1,6 @@
 <?php
-
+//påner en csv fil
 $file = fopen("Postnummerregister-csv.csv", "r");
-
-
-
 
 ?>
 
@@ -27,6 +24,8 @@ $file = fopen("Postnummerregister-csv.csv", "r");
         </tr>
         
         <?php
+
+        //henter ut de 20 første linjene av filen
         for($i = 0; $i < 20; $i++) {
             $data = fgetcsv($file, 0, ";");
         ?>
